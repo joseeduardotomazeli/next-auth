@@ -1,5 +1,7 @@
 import { createContext, ReactNode } from 'react';
 
+import api from '../services/api';
+
 interface SignInCredentials {
   email: string;
   password: string;
@@ -24,8 +26,16 @@ function AuthProvider(props: AuthProviderProps) {
   async function signIn(credentials: SignInCredentials) {
     const { email, password } = credentials;
 
-    console.log(email);
-    console.log(password);
+    try {
+      const response = await api.post('/sessions', {
+        email,
+        password,
+      });
+
+      console.log(response);
+    } catch (err) {
+      console.error(err);
+    }
   }
 
   return (
