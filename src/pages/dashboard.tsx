@@ -9,8 +9,12 @@ function Dashboard() {
 
   useEffect(() => {
     async function getUser() {
-      const response = await api.get('/me');
-      console.log(response.data);
+      try {
+        const response = await api.get('/me');
+        console.log(response.data);
+      } catch (err) {
+        console.error(err);
+      }
     }
 
     getUser();
