@@ -2,6 +2,8 @@ import { useContext, useEffect } from 'react';
 
 import { AuthContext } from '../contexts/AuthContext';
 
+import CanSee from '../components/CanSee';
+
 import api from '../services/api';
 import createAPI from '../services/createAPI';
 
@@ -23,7 +25,15 @@ function Dashboard() {
     getUser();
   }, []);
 
-  return <h1>{user?.email}</h1>;
+  return (
+    <>
+      <h1>{user?.email}</h1>
+
+      <CanSee permissions={['metrics.list']}>
+        <h2>Métricas</h2>
+      </CanSee>
+    </>
+  );
 }
 
 export const getServerSideProps = withSSRAuth(async (context) => {
