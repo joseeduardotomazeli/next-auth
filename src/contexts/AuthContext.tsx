@@ -6,8 +6,8 @@ import api from '../services/api';
 
 interface User {
   email: string;
-  permissions: [];
-  roles: [];
+  permissions: string[];
+  roles: string[];
 }
 
 interface SignInCredentials {
