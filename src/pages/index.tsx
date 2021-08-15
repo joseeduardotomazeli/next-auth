@@ -2,6 +2,8 @@ import { useContext, useState, FormEvent } from 'react';
 
 import { AuthContext } from '../contexts/AuthContext';
 
+import withSSRGuest from '../utils/withSSRGuest';
+
 function Home() {
   const { signIn } = useContext(AuthContext);
 
@@ -33,5 +35,11 @@ function Home() {
     </form>
   );
 }
+
+export const getServerSideProps = withSSRGuest(async () => {
+  return {
+    props: {},
+  };
+});
 
 export default Home;
