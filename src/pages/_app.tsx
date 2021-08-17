@@ -1,6 +1,10 @@
+import { AppProps } from 'next/app';
+
 import AuthProvider from '../contexts/AuthContext';
 
-function MyApp({ Component, pageProps }) {
+function App(props: AppProps) {
+  const { Component, pageProps } = props;
+
   return (
     <AuthProvider>
       <Component {...pageProps} />
@@ -8,4 +12,4 @@ function MyApp({ Component, pageProps }) {
   );
 }
 
-export default MyApp;
+export default App;

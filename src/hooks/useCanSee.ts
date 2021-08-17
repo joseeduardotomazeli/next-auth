@@ -2,6 +2,8 @@ import { useContext } from 'react';
 
 import { AuthContext } from '../contexts/AuthContext';
 
+import validateUserPermissions from '../utils/validateUserPermissions';
+
 interface UseCanSeeProps {
   permissions?: string[];
   roles?: string[];
@@ -14,23 +16,13 @@ function useCanSee(props: UseCanSeeProps) {
 
   if (!isAuthenticated) return false;
 
-  if (permissions?.length) {
-    const hasAllPermissions = permissions.every((permission) => {
-      return user.permissions.includes(permission);
-    });
+  const userHasPermissions = validateUserPermissions({
+    user,
+    permissions,
+    roles,
+  });
 
-    if (!hasAllPermissions) return false;
-  }
-
-  if (roles?.length) {
-    const hasAllRoles = roles.some((role) => {
-      return user.roles.includes(role);
-    });
-
-    if (!hasAllRoles) return false;
-  }
-
-  return true;
+  return userHasPermissions;
 }
 
 export default useCanSee;
