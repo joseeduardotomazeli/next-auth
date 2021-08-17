@@ -10,7 +10,7 @@ import createAPI from '../services/createAPI';
 import withSSRAuth from '../utils/withSSRAuth';
 
 function Dashboard() {
-  const { user } = useContext(AuthContext);
+  const { user, signOut } = useContext(AuthContext);
 
   useEffect(() => {
     async function getUser() {
@@ -28,6 +28,8 @@ function Dashboard() {
   return (
     <>
       <h1>{user?.email}</h1>
+
+      <button onClick={signOut}>Sign out</button>
 
       <CanSee permissions={['metrics.list']}>
         <h2>Métricas</h2>
